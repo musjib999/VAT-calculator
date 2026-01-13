@@ -31,10 +31,12 @@ class _VatSliderState extends State<VatSlider> {
       children: [
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
-            activeTrackColor: const Color(0xFF9333EA),
-            inactiveTrackColor: const Color(0xFFE9D5FF),
-            thumbColor: const Color(0xFF9333EA),
-            overlayColor: const Color(0xFF9333EA).withValues(alpha: 0.1),
+            activeTrackColor: Theme.of(context).primaryColor,
+            inactiveTrackColor: Theme.of(context).brightness == Brightness.dark
+                ? Theme.of(context).primaryColor.withValues(alpha: 0.3)
+                : const Color(0xFFE9D5FF),
+            thumbColor: Theme.of(context).primaryColor,
+            overlayColor: Theme.of(context).primaryColor.withValues(alpha: 0.1),
             thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10),
             trackHeight: 4,
           ),
@@ -53,14 +55,18 @@ class _VatSliderState extends State<VatSlider> {
               widget.minLabel,
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey[600],
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey[400]
+                    : Colors.grey[600],
               ),
             ),
             Text(
               widget.maxLabel,
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey[600],
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey[400]
+                    : Colors.grey[600],
               ),
             ),
           ],

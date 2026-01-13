@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  // Base colors
   static const Color white = Colors.white;
   static const Color black = Colors.black;
 
+  // VAT Calculator specific colors
+  static const Color primaryPurple = Color(0xFF9333EA);
+  static const Color lightPurpleBg = Color(0xFFFAF5FF);
+  static const Color lightPurpleAccent = Color(0xFFF3E8FF);
+  static const Color darkPurple = Color(0xFF7C2DD2);
+  static const Color darkPurpleBg = Color(0xFF1A0B2E);
+  static const Color darkCardBg = Color(0xFF2D1B3D);
+  static const Color darkPurpleAccent = Color(0xFF3D1F5C);
+
+  // Legacy colors
   static const Color primaryColor = Color(0xff017EA6);
   static const Color darkPrimaryColor = Color(0xff033749);
   static const Color lighterPrimaryColor = Color(0xffDCF6FF);

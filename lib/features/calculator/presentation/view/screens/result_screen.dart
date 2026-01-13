@@ -58,7 +58,7 @@ class _ResultScreenState extends State<ResultScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF5FF),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -132,11 +132,11 @@ class _ResultScreenState extends State<ResultScreen>
                       Container(
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(24),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF9333EA).withValues(alpha: 0.1),
+                              color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
                               blurRadius: 20,
                               offset: const Offset(0, 4),
                             ),
@@ -151,7 +151,7 @@ class _ResultScreenState extends State<ResultScreen>
                                     width: 32,
                                     height: 32,
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFF9333EA),
+                                      color: Theme.of(context).primaryColor,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: const Icon(
@@ -185,7 +185,9 @@ class _ResultScreenState extends State<ResultScreen>
                                               : item.name,
                                           style: TextStyle(
                                             fontSize: 14,
-                                            color: Colors.grey[600],
+                                            color: Theme.of(context).brightness == Brightness.dark
+                                                ? Colors.grey[400]
+                                                : Colors.grey[600],
                                           ),
                                         ),
                                       ),
@@ -193,7 +195,9 @@ class _ResultScreenState extends State<ResultScreen>
                                         VatFormatters.formatCurrency(item.price),
                                         style: TextStyle(
                                           fontSize: 14,
-                                          color: Colors.grey[600],
+                                          color: Theme.of(context).brightness == Brightness.dark
+                                              ? Colors.grey[400]
+                                              : Colors.grey[600],
                                         ),
                                       ),
                                     ],
@@ -206,16 +210,20 @@ class _ResultScreenState extends State<ResultScreen>
                               label: 'Original Amount',
                               amount: VatFormatters.formatCurrency(calculation.amount),
                               icon: Icons.receipt,
-                              iconColor: const Color(0xFF9333EA),
-                              backgroundColor: const Color(0xFFF3E8FF),
+                              iconColor: Theme.of(context).primaryColor,
+                              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                                  ? Theme.of(context).primaryColor.withOpacity(0.2)
+                                  : const Color(0xFFF3E8FF),
                             ),
                             const SizedBox(height: 16),
                             VatBreakdownCard(
                               label: 'VAT Amount (${calculation.vatRate}%)',
                               amount: VatFormatters.formatCurrency(vatAmount),
                               icon: Icons.trending_up,
-                              iconColor: const Color(0xFFA855F7),
-                              backgroundColor: const Color(0xFFF3E8FF),
+                              iconColor: Theme.of(context).primaryColor.withOpacity(0.8),
+                              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                                  ? Theme.of(context).primaryColor.withOpacity(0.2)
+                                  : const Color(0xFFF3E8FF),
                             ),
                             const SizedBox(height: 16),
                             Container(
@@ -223,7 +231,7 @@ class _ResultScreenState extends State<ResultScreen>
                               decoration: BoxDecoration(
                                 border: Border(
                                   top: BorderSide(
-                                    color: const Color(0xFF9333EA)
+                                    color: Theme.of(context).primaryColor
                                         .withValues(alpha: 0.2),
                                     width: 1,
                                     style: BorderStyle.solid,
@@ -240,7 +248,7 @@ class _ResultScreenState extends State<ResultScreen>
                               label: 'Total Amount',
                               amount: VatFormatters.formatCurrency(totalAmount),
                               icon: Icons.check_circle,
-                              iconColor: const Color(0xFF9333EA),
+                              iconColor: Theme.of(context).primaryColor,
                               isTotal: true,
                               vatRate: '${calculation.vatRate}%',
                             ),
@@ -253,11 +261,11 @@ class _ResultScreenState extends State<ResultScreen>
                         child: Container(
                           height: 56,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF9333EA),
+                            color: Theme.of(context).primaryColor,
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF9333EA).withValues(alpha: 0.3),
+                                color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
                                 blurRadius: 12,
                                 offset: const Offset(0, 4),
                               ),

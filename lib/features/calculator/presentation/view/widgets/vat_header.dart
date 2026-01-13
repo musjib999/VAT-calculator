@@ -20,7 +20,7 @@ class VatHeader extends StatelessWidget {
           width: 64,
           height: 64,
           decoration: BoxDecoration(
-            color: const Color(0xFF9333EA),
+            color: Theme.of(context).primaryColor,
             shape: BoxShape.circle,
           ),
           child: Icon(
@@ -32,10 +32,10 @@ class VatHeader extends StatelessWidget {
         const SizedBox(height: 16),
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF9333EA),
+            color: Theme.of(context).primaryColor,
           ),
         ),
         const SizedBox(height: 8),
@@ -43,7 +43,9 @@ class VatHeader extends StatelessWidget {
           subtitle,
           style: TextStyle(
             fontSize: 14,
-            color: Colors.grey[600],
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey[400]
+                : Colors.grey[600],
           ),
         ),
       ],

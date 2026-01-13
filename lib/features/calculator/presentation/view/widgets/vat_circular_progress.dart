@@ -76,7 +76,8 @@ class _VatCircularProgressState extends State<VatCircularProgress>
             size: const Size(256, 256),
             painter: _CircularProgressPainter(
               progress: 0,
-              backgroundColor: const Color(0xFF9333EA).withValues(alpha: 0.1),
+              backgroundColor: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+              progressColor: Theme.of(context).primaryColor,
             ),
           ),
           // Animated progress circle
@@ -88,6 +89,7 @@ class _VatCircularProgressState extends State<VatCircularProgress>
                 painter: _CircularProgressPainter(
                   progress: _animation.value,
                   backgroundColor: Colors.transparent,
+                  progressColor: Theme.of(context).primaryColor,
                 ),
               );
             },
@@ -100,16 +102,18 @@ class _VatCircularProgressState extends State<VatCircularProgress>
                 'Total Amount',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey[600],
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey[400]
+                      : Colors.grey[600],
                 ),
               ),
               const SizedBox(height: 4),
               Text(
                 widget.totalAmount,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF9333EA),
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
               const SizedBox(height: 4),
@@ -117,7 +121,9 @@ class _VatCircularProgressState extends State<VatCircularProgress>
                 'VAT ${widget.vatRate}%',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey[600],
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey[400]
+                      : Colors.grey[600],
                 ),
               ),
             ],
@@ -131,10 +137,12 @@ class _VatCircularProgressState extends State<VatCircularProgress>
 class _CircularProgressPainter extends CustomPainter {
   final double progress;
   final Color backgroundColor;
+  final Color progressColor;
 
   _CircularProgressPainter({
     required this.progress,
     required this.backgroundColor,
+    required this.progressColor,
   });
 
   @override
@@ -155,7 +163,7 @@ class _CircularProgressPainter extends CustomPainter {
     // Progress circle
     if (progress > 0 && backgroundColor == Colors.transparent) {
       final progressPaint = Paint()
-        ..color = const Color(0xFF9333EA)
+        ..color = progressColor
         ..strokeWidth = 16
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round;

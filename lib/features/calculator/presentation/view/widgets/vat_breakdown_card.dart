@@ -26,7 +26,7 @@ class VatBreakdownCard extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: const Color(0xFF9333EA),
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -84,7 +84,9 @@ class VatBreakdownCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: backgroundColor ?? const Color(0xFFF3E8FF),
+        color: backgroundColor ?? (Theme.of(context).brightness == Brightness.dark
+            ? Theme.of(context).primaryColor.withOpacity(0.2)
+            : const Color(0xFFF3E8FF)),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -111,16 +113,18 @@ class VatBreakdownCard extends StatelessWidget {
                   label,
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey[600],
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey[400]
+                        : Colors.grey[600],
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   amount,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF9333EA),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vat_calculator/core/utils/locator.dart';
 import 'package:vat_calculator/features/calculator/domain/usecases/calculate_vat_usecase.dart';
 import 'package:vat_calculator/shared/components/app_input_field.dart';
+import 'package:vat_calculator/shared/widgets/theme_switcher.dart';
 
 import '../../bloc/bloc.dart';
 import '../widgets/widgets.dart';
@@ -77,7 +78,7 @@ class _CalculatorScreenState extends State<CalculatorScreen>
         return bloc;
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFFAF5FF),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(15),
@@ -87,20 +88,29 @@ class _CalculatorScreenState extends State<CalculatorScreen>
                 position: _slideAnimation,
                 child: Column(
                   children: [
-                    const SizedBox(height: 10),
-                    const VatHeader(
-                      title: 'VAT Calculator',
-                      subtitle: 'Calculate your VAT quickly and easily',
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const SizedBox(width: 48), // Spacer for centering
+                        const Expanded(
+                          child: VatHeader(
+                            title: 'VAT Calculator',
+                            subtitle: 'Calculate your VAT quickly and easily',
+                          ),
+                        ),
+                        const ThemeSwitcher(),
+                      ],
                     ),
+                    const SizedBox(height: 10),
                     const SizedBox(height: 12),
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(24),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFF9333EA).withValues(alpha: 0.1),
+                            color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
                             blurRadius: 20,
                             offset: const Offset(0, 4),
                           ),
@@ -162,7 +172,9 @@ class _CalculatorScreenState extends State<CalculatorScreen>
                                   Container(
                                     padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFFF3E8FF),
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? Theme.of(context).primaryColor.withValues(alpha: 0.2)
+                                          : const Color(0xFFF3E8FF),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Center(
@@ -212,10 +224,10 @@ class _CalculatorScreenState extends State<CalculatorScreen>
                                     ),
                                     Text(
                                       state.formattedSubtotal,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                        color: Color(0xFF9333EA),
+                                        color: Theme.of(context).primaryColor,
                                       ),
                                     ),
                                   ],
@@ -304,13 +316,13 @@ class _CalculatorScreenState extends State<CalculatorScreen>
                             height: 56,
                             decoration: BoxDecoration(
                               color: isValid
-                                  ? const Color(0xFF9333EA)
+                                  ? Theme.of(context).primaryColor
                                   : Colors.grey[300],
                               borderRadius: BorderRadius.circular(16),
                               boxShadow: isValid
                                   ? [
                                       BoxShadow(
-                                        color: const Color(0xFF9333EA)
+                                        color: Theme.of(context).primaryColor
                                             .withValues(alpha: 0.3),
                                         blurRadius: 12,
                                         offset: const Offset(0, 4),

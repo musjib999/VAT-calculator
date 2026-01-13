@@ -27,13 +27,15 @@ class VatPresetButtons extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
               color: isSelected
-                  ? const Color(0xFF9333EA)
-                  : const Color(0xFFF3E8FF),
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).brightness == Brightness.dark
+                      ? Theme.of(context).primaryColor.withOpacity(0.2)
+                      : const Color(0xFFF3E8FF),
               borderRadius: BorderRadius.circular(20),
               boxShadow: isSelected
                   ? [
                       BoxShadow(
-                        color: const Color(0xFF9333EA).withValues(alpha: 0.3),
+                        color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),
@@ -47,7 +49,9 @@ class VatPresetButtons extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
-                color: isSelected ? Colors.white : const Color(0xFF9333EA),
+                color: isSelected
+                    ? Colors.white
+                    : Theme.of(context).primaryColor,
               ),
             ),
           ),
